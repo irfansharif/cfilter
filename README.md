@@ -42,10 +42,10 @@ import "github.com/irfansharif/cfilter"
 
 cf := cfilter.NewCFilter()
 
-cf.Insert([]byte{"bongiorno"})  // inserts 'bongiorno' to the filter
-cf.Lookup([]byte{"hola"})       // looks up 'hola' in the filter, may return false positive
+cf.Insert([]byte("bongiorno"))  // inserts 'bongiorno' to the filter
+cf.Lookup([]byte("hola"))       // looks up 'hola' in the filter, may return false positive
 cf.Size()                       // returns 1 (given only 'bongiorno' was added)
-cf.Delete([]byte{"bonjour"})    // tries deleting 'bonjour' from filter, may delete false item
+cf.Delete([]byte("bonjour"))    // tries deleting 'bonjour' from filter, may delete false item
 ```
 
 ## Authors
