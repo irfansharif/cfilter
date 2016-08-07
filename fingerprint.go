@@ -1,21 +1,19 @@
 package cfilter
 
-import "hash/fnv"
+import "hash"
 
-const fpSize = 1
+const fpSize = 2
 
 type fingerprint []byte
 
-var hashera = fnv.New64()
-
-func fprint(item []byte) fingerprint {
-	hashera.Reset()
-	hashera.Write(item)
-	hash := hashera.Sum(nil)
+func fprint(item []byte, hashfn hash.Hash64) fingerprint {
+	hashfn.Reset()
+	hashfn.Write(item)
+	h := hashfn.Sum(nil)
 
 	fp := fingerprint{}
 	for i := 0; i < fpSize; i++ {
-		fp = append(fp, hash[i])
+		fp = append(fp, h[i])
 	}
 
 	if fp == nil {
@@ -23,4 +21,27 @@ func fprint(item []byte) fingerprint {
 	}
 
 	return fp
+}
+
+func hashfp(f fingerprint) uint {
+	var h uint = 5381
+	for i := range f {
+		h = ((h << 5) + h) + uint(f[i])
+	}
+
+	return h
+}
+
+func match(a, b fingerprint) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+
+	return true
 }
