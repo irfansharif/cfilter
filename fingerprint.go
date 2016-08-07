@@ -1,6 +1,9 @@
 package cfilter
 
-import "hash"
+import (
+	"bytes"
+	"hash"
+)
 
 const fpSize = 2
 
@@ -33,15 +36,5 @@ func hashfp(f fingerprint) uint {
 }
 
 func match(a, b fingerprint) bool {
-	if len(a) != len(b) {
-		return false
-	}
-
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-
-	return true
+	return bytes.Equal(a, b)
 }
