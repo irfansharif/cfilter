@@ -1,5 +1,9 @@
 # cfilter: Cuckoo Filter implementation in Go
 
+[![GoDoc](https://godoc.org/github.com/irfansharif/cfilter?status.svg)](https://godoc.org/github.com/irfansharif/cfilter)
+[![Build Status](https://travis-ci.org/irfansharif/cfilter.svg?branch=master)](https://travis-ci.org/irfansharif/cfilter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/irfansharif/cfilter)](https://goreportcard.com/report/github.com/irfansharif/cfilter)
+
 Cuckoo filter is a Bloom filter replacement for approximated set-membership
 queries. Cuckoo filters support adding and removing items dynamically while
 achieving even higher performance than Bloom filters. For applications that
@@ -42,11 +46,23 @@ import "github.com/irfansharif/cfilter"
 
 cf := cfilter.NewCFilter()
 
-cf.Insert([]byte("bongiorno"))  // inserts 'bongiorno' to the filter
-cf.Lookup([]byte("hola"))       // looks up 'hola' in the filter, may return false positive
-cf.Size()                       // returns 1 (given only 'bongiorno' was added)
-cf.Delete([]byte("bonjour"))    // tries deleting 'bonjour' from filter, may delete false item
+// inserts 'bongiorno' to the filter
+cf.Insert([]byte("bongiorno"))  
+
+// looks up 'hola' in the filter, may return false positive
+cf.Lookup([]byte("hola"))       
+
+// returns 1 (given only 'bongiorno' was added)
+cf.Size()                       
+
+// tries deleting 'bonjour' from filter, may delete another element
+// this could occur when another byte slice with the same fingerprint
+// as another is 'deleted'
+cf.Delete([]byte("bonjour"))    
 ```
 
-## Authors
-Irfan Sharif <irfanmahmoudsharif@gmail.com>
+## Author
+Irfan Sharif: <irfanmahmoudsharif@gmail.com>, [@irfansharifm](https://twitter.com/irfansharifm)
+
+## License
+cfilter source code is available under the MIT [License](/LICENSE).
