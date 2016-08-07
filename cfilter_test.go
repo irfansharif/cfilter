@@ -7,7 +7,7 @@ import (
 )
 
 func TestMultipleInsertions(t *testing.T) {
-	cf := NewCFilter()
+	cf := New()
 
 	fd, err := os.Open("/usr/share/dict/words")
 	if err != nil {
@@ -42,7 +42,7 @@ func TestMultipleInsertions(t *testing.T) {
 }
 
 func TestBasicInsertion(t *testing.T) {
-	cf := NewCFilter()
+	cf := New()
 	if !cf.Insert([]byte("bongiorno")) {
 		t.Errorf("Wasn't able to insert very first word, 'bongiorno'")
 	}
@@ -71,7 +71,7 @@ func TestBasicInsertion(t *testing.T) {
 }
 
 func TestInitialization(t *testing.T) {
-	cf := NewCFilter()
+	cf := New()
 	size := cf.Size()
 	if size != 0 {
 		t.Errorf("Expected initial size to be 0, not %d", size)
@@ -79,7 +79,7 @@ func TestInitialization(t *testing.T) {
 }
 
 func BenchmarkInsertionAndDeletion(b *testing.B) {
-	cf := NewCFilter()
+	cf := New()
 	for n := 0; n < b.N; n++ {
 		cf.Insert([]byte("bongiorno"))
 		cf.Delete([]byte("bongiorno"))

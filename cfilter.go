@@ -7,7 +7,7 @@ import (
 )
 
 // The maximum number of times we kick down items/displace from their buckets
-const kMaxCuckooCount = 500
+const maxCuckooCount = 500
 
 // The number of buckets in the filter
 const cfSize = (1 << 18) / bSize
@@ -20,9 +20,9 @@ type CFilter struct {
 	buckets []bucket
 }
 
-// NewCFilter returns a new CFilter object. It's Insert, Lookup, Delete and
+// New returns a new CFilter object. It's Insert, Lookup, Delete and
 // Size behave as their names suggest.
-func NewCFilter() *CFilter {
+func New() *CFilter {
 	cf := new(CFilter)
 
 	cf.size = 0
@@ -48,7 +48,7 @@ func (cf *CFilter) Insert(item []byte) bool {
 	}
 
 	i := [2]uint{j, k}[rand.Intn(2)]
-	for n := 0; n < kMaxCuckooCount; n++ {
+	for n := 0; n < maxCuckooCount; n++ {
 		f = cf.buckets[i].swap(f)
 		i ^= hashfp(f) % cfSize
 
