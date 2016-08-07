@@ -43,8 +43,8 @@ func TestMultipleInsertions(t *testing.T) {
 
 func TestBasicInsertion(t *testing.T) {
 	cf := New()
-	if !cf.Insert([]byte("bongiorno")) {
-		t.Errorf("Wasn't able to insert very first word, 'bongiorno'")
+	if !cf.Insert([]byte("buongiorno")) {
+		t.Errorf("Wasn't able to insert very first word, 'buongiorno'")
 	}
 
 	size := cf.Size()
@@ -52,16 +52,16 @@ func TestBasicInsertion(t *testing.T) {
 		t.Errorf("Expected size after insertion to be 1, not %d", size)
 	}
 
-	if !cf.Lookup([]byte("bongiorno")) {
-		t.Errorf("Expected to find 'bongiorno' in filter set membership query")
+	if !cf.Lookup([]byte("buongiorno")) {
+		t.Errorf("Expected to find 'buongiorno' in filter set membership query")
 	}
 
-	if !cf.Delete([]byte("bongiorno")) {
-		t.Errorf("Expected to be able to delete 'bongiorno' in filter")
+	if !cf.Delete([]byte("buongiorno")) {
+		t.Errorf("Expected to be able to delete 'buongiorno' in filter")
 	}
 
-	if cf.Lookup([]byte("bongiorno")) {
-		t.Errorf("Did not expect to find 'bongiorno' in filter after deletion")
+	if cf.Lookup([]byte("buongiorno")) {
+		t.Errorf("Did not expect to find 'buongiorno' in filter after deletion")
 	}
 
 	size = cf.Size()
@@ -81,7 +81,7 @@ func TestInitialization(t *testing.T) {
 func BenchmarkInsertionAndDeletion(b *testing.B) {
 	cf := New()
 	for n := 0; n < b.N; n++ {
-		cf.Insert([]byte("bongiorno"))
-		cf.Delete([]byte("bongiorno"))
+		cf.Insert([]byte("buongiorno"))
+		cf.Delete([]byte("buongiorno"))
 	}
 }
