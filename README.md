@@ -50,16 +50,24 @@ cf := cfilter.New()
 cf.Insert([]byte("buongiorno"))
 
 // looks up 'hola' in the filter, may return false positive
-cf.Lookup([]byte("hola"))       
+cf.Lookup([]byte("hola"))
 
 // returns 1 (given only 'buongiorno' was added)
-cf.Size()                       
+cf.Size()
 
 // tries deleting 'bonjour' from filter, may delete another element
 // this could occur when another byte slice with the same fingerprint
 // as another is 'deleted'
-cf.Delete([]byte("bonjour"))    
+cf.Delete([]byte("bonjour"))
 ```
+
+This repository was featured on Hacker News, front page (discussion
+[here](https://news.ycombinator.com/item?id=12241332)). Another implementation
+in Go can be found at
+[seiflotfy/cuckoofilter](https://github.com/seiflotfy/cuckoofilter) and is where I borrowed
+the ideas for my tests, notably `TestMultipleInsertions`. The original
+implementation in C++ by the authors of the research paper can be found at
+[efficient/cuckoofilter](https://github.com/efficient/cuckoofilter).
 
 ## Author
 Irfan Sharif: <irfanmahmoudsharif@gmail.com>, [@irfansharifm](https://twitter.com/irfansharifm)
