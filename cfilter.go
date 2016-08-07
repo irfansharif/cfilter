@@ -50,10 +50,23 @@ func (cf *CFilter) Insert(item []byte) bool {
 }
 
 func (cf *CFilter) Lookup(item []byte) bool {
-	return false
+	f := fprint(item)
+	j := hash(item) % cfSize
+	k := (j ^ hash(f)) % cfSize
+
+	return cf.buckets[j].lookup(f) || cf.buckets[k].lookup(f)
 }
 
 func (cf *CFilter) Delete(item []byte) bool {
+	f := fprint(item)
+	j := hash(item) % cfSize
+	k := (j ^ hash(f)) % cfSize
+
+	if cf.buckets[j].remove(f) || cf.buckets[k].remove(f) {
+		cf.size--
+		return true
+	}
+
 	return false
 }
 
