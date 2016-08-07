@@ -44,7 +44,7 @@ A cuckoo filter supports following operations:
 ```go
 import "github.com/irfansharif/cfilter"
 
-cf := cfilter.NewCFilter()
+cf := cfilter.New()
 
 // inserts 'bongiorno' to the filter
 cf.Insert([]byte("bongiorno"))  
