@@ -5,17 +5,15 @@ import (
 	"hash"
 )
 
-const fpSize = 2
-
 type fingerprint []byte
 
-func fprint(item []byte, hashfn hash.Hash64) fingerprint {
+func fprint(item []byte, fpSize uint8, hashfn hash.Hash) fingerprint {
 	hashfn.Reset()
 	hashfn.Write(item)
 	h := hashfn.Sum(nil)
 
 	fp := fingerprint{}
-	for i := 0; i < fpSize; i++ {
+	for i := uint8(0); i < fpSize; i++ {
 		fp = append(fp, h[i])
 	}
 
