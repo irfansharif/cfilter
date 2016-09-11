@@ -38,7 +38,7 @@ A cuckoo filter supports following operations:
 *  `Delete(item)`: delete the given item from the filter. Note that to use this
    method, it must be ensured that this item is in the filter (e.g., based on
    records on external storage); otherwise, a false item may be deleted.
-*  `Size()`: return the total number of items currently in the filter
+*  `Count()`: return the total number of items currently in the filter
 
 ## Example Usage
 ```go
@@ -53,7 +53,7 @@ cf.Insert([]byte("buongiorno"))
 cf.Lookup([]byte("hola"))
 
 // returns 1 (given only 'buongiorno' was added)
-cf.Size()
+cf.Count()
 
 // tries deleting 'bonjour' from filter, may delete another element
 // this could occur when another byte slice with the same fingerprint

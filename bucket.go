@@ -2,8 +2,6 @@ package cfilter
 
 import "math/rand"
 
-const bSize = 4
-
 type bucket []fingerprint
 
 func (b bucket) insert(f fingerprint) bool {
@@ -40,7 +38,7 @@ func (b bucket) remove(f fingerprint) bool {
 }
 
 func (b bucket) swap(f fingerprint) fingerprint {
-	i := rand.Intn(bSize - 1)
+	i := rand.Intn(len(b) - 1)
 	b[i], f = f, b[i]
 
 	return f
