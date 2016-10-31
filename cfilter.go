@@ -10,7 +10,7 @@ import (
 type CFilter struct {
 	hashfn  hash.Hash // Hash function used for fingerprinting
 	buckets []bucket  // Buckets where fingerprints are stored
-	count   uint
+	count   uint      // Total number of elements currently in the Filter
 
 	bSize  uint8 // Bucket size
 	fpSize uint8 // Fingerprint size

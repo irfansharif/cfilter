@@ -2,6 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/irfansharif/cfilter?status.svg)](https://godoc.org/github.com/irfansharif/cfilter)
 [![Build Status](https://travis-ci.org/irfansharif/cfilter.svg?branch=master)](https://travis-ci.org/irfansharif/cfilter)
+[![Coverage Status](https://coveralls.io/repos/github/irfansharif/cfilter/badge.svg?branch=master)](https://coveralls.io/github/irfansharif/cfilter?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/irfansharif/cfilter)](https://goreportcard.com/report/github.com/irfansharif/cfilter)
 
 Cuckoo filter is a Bloom filter replacement for approximated set-membership
