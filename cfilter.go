@@ -57,7 +57,7 @@ func (cf *CFilter) Insert(item []byte) bool {
 	i := [2]uint{j, k}[rand.Intn(2)]
 	for n := uint(0); n < cf.kicks; n++ {
 		f = cf.buckets[i].swap(f)
-		i ^= hashfp(f) % cf.size
+		i = (i ^ hashfp(f)) % cf.size
 
 		if cf.buckets[i].insert(f) {
 			cf.count++
