@@ -38,7 +38,7 @@ func (b bucket) remove(f fingerprint) bool {
 }
 
 func (b bucket) swap(f fingerprint) fingerprint {
-	i := rand.Intn(len(b) - 1)
+	i := rand.Intn(len(b))
 	b[i], f = f, b[i]
 
 	return f
