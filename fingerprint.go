@@ -12,14 +12,8 @@ func fprint(item []byte, fpSize uint8, hashfn hash.Hash) fingerprint {
 	hashfn.Write(item)
 	h := hashfn.Sum(nil)
 
-	fp := fingerprint{}
-	for i := uint8(0); i < fpSize; i++ {
-		fp = append(fp, h[i])
-	}
-
-	if fp == nil {
-		fp[0] += 7
-	}
+	fp := make(fingerprint, fpSize)
+	copy(fp, h)
 
 	return fp
 }
